@@ -6,36 +6,41 @@
 #define LABB1_LEXER_H
 
 #include <iostream>
+#include <string>
 
+//global! kan använda TokenType::OR osv direkt
+enum TokenType {
+    OR,            // "+"
+    STAR,          // "*"
+    CHAR,          // Any character
+    GROUP_START,   // "("
+    GROUP_END,     // " )"
+    ANY,           // "."
+    COUNT_START,   // "{"
+    COUNT_END,      // "}"
+    IGNORE_CASE,   // "\I"
+    OUTPUT,        // "\O{n}"
+    DIGIT,          // A number (0-9)
+    END_OF_INPUT   // End of input (EOF)
+};
 
-// <REGEXPR> -> <EXPR>
-// <EXPR> -> <OR> | <STAR> | <CAPTURE_GROUP> | <ANY> | <COUNT> | <IGNORE_CASE> | <OUTPUT> | <TERM>
-// <OR> -> <TERM> + <TERM>
-// <STAR> -> <TERM> *
-// <CAPTURE_GROUP> -> ( <EXPR> )
-// <ANY> -> .
-// <COUNT> -> <TERM> {  <NUMBER>  } |  <ANY>  {  <NUMBER>  }
-// <IGNORE_CASE> -> <TERM> \I
-// <OUTPUT> -> <TERM> \O{ <NUMBER> }
-// <TERM> -> <CHAR> [<TERM>]
-// <CHAR> -> any non-special character
-// <DIGIT> -> 0|1|2|3|4|5|6|7|8|9
-// <NUMBER> -> <DIGIT> [<NUMBER>]
+struct Token{ //readability moment
+    TokenType type;
+    char value;
+};
 
-/*
- *
- *
- */
 using it = std::string::iterator;
 
-class lexer {
-    enum token{
-        REGEXP,
-        EXPR,
-        CHAR,
-        INVALID,
-        EOI
-    };
+class Lexer {
+public:
+    Lexer(it first, it last);
+
+    Token getNextToken();
+
+    std::vector<Token> collectTokens();
+private:
+    it current; // Håller koll på var vi är
+    it last;    // Markerar slutet på input
 };
 
 

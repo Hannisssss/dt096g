@@ -1,0 +1,41 @@
+<REGEXPR> -> <EXPR>
+<EXPR> -> <OR> | <STAR> | <CAPTURE_GROUP> | <ANY> | <COUNT> | <IGNORE_CASE> | <OUTPUT> | <TERM>
+<OR> -> <TERM> + <TERM>
+<STAR> -> <TERM> *
+<CAPTURE_GROUP> -> ( <EXPR> )
+<ANY> -> .
+<COUNT> -> <TERM> {  <NUMBER>  } |  <ANY>  {  <NUMBER>  }
+<IGNORE_CASE> -> <TERM> \I
+<OUTPUT> -> <TERM> \O{ <NUMBER> }
+<TERM> -> <CHAR> [<TERM>]
+<CHAR> -> any non-special character
+<DIGIT> -> 0|1|2|3|4|5|6|7|8|9
+<NUMBER> -> <DIGIT> [<NUMBER>]
+
+-icke terminaler-
+"Recursive descent"
+<REGEXPR> -> <EXPR>
+
+<EXPR> -> <OR> | <TERM> | \O{ <NUMBER> } | <IGNORE_CASE> <EXPR>
+
+<OR> -> <TERM> + <TERM>   //"OR" hanterar alternation, som a|b
+
+<IGNORE_CASE> \I //Inte implementerad ):
+
+<TERM> -> <FACTOR>[<TERM>]  //representerar sekvenser av faktorer som kan följa på varandra
+
+<FACTOR> ->  <ANY> | <CHAR> |  <FACTOR> <UNARY>  //Faktorer är atomära :)
+
+<CAPTURE_GROUP> -> ( <EXPR> )   //En grupp är en parentes med ett uttryck inuti
+
+<ANY> -> .    //matchar vilket tecken som helst
+
+<CHAR> -> any non-special character
+
+<UNARY> -> * | { <NUMBER> }    //Modifierare som appliceras på faktorer
+
+<DIGIT> -> 0|1|2|3|4|5|6|7|8|9   // siffror
+
+<NUMBER> -> <DIGIT>[<NUMBER>]   //Ett tal, en sekvens av siffror
+
+
