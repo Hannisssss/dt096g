@@ -47,7 +47,7 @@ ASTNodePtr Parser::parse() {
 
 ASTNodePtr Parser::parse_expr() {
     auto left = parse_term();
-    while(current_token().type == TokenType::OR){
+    while(current_token().type == TokenType::OR){ //kan finnas typ a|b|c
         next_token();
         auto right = parse_term();
         left = std::make_unique<ORNode>(std::move(left), std::move(right));
@@ -74,7 +74,7 @@ ASTNodePtr Parser::parse_term() {
     }
 }
 
-ASTNodePtr Parser::parse_factor() {
+ASTNodePtr Parser::parse_factor() { //Atomära enhter
     ASTNodePtr node;
     if(current_token().type == TokenType::ANY){
         node = std::make_unique<ANYNode>();

@@ -4,15 +4,13 @@
 #include "ASTNode.h"
 #include <string>
 EvalResult CONCATNode::evaluate(const std::string &input, size_t &index) {
-    size_t original_index = index;
     std::string match;
 
     for(auto &child: children){
         EvalResult child_result = child->evaluate(input,index);
 
         if(!child_result.status){
-            index = original_index;
-            return EvalResult::failure();
+            return child_result;
         }
         match += child_result.match;
     }
@@ -77,7 +75,7 @@ EvalResult COUNTNode::evaluate(const std::string &input, size_t &index) {
     EvalResult result = factor->evaluate(input, index);
     if(!result.status){
         index = original_index;
-        return EvalResult::failure();
+        return result;
     }
     match += result.match;
     i++;

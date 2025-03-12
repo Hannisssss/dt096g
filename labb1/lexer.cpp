@@ -21,7 +21,7 @@ Token Lexer::getNextToken() {
         case '.': return { TokenType::ANY, ch  };
         case '{': return { TokenType::COUNT_START, ch  };
         case '}': return { TokenType::COUNT_END, ch  };
-        case '\\':  // Hantera escape-sekvenser \I och \O{}
+        case '\\':  // Var tänkt att hantera escape-sekvenser \I och \O{}
             if (current != last) {
                 char next = *current++;
                 if (next == 'I') return { TokenType::IGNORE_CASE, ch  };

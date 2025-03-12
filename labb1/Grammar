@@ -12,6 +12,7 @@
 <DIGIT> -> 0|1|2|3|4|5|6|7|8|9
 <NUMBER> -> <DIGIT> [<NUMBER>]
 
+
 -icke terminaler-
 "Recursive descent"
 <REGEXPR> -> <EXPR>
@@ -24,7 +25,7 @@
 
 <TERM> -> <FACTOR>[<TERM>]  //representerar sekvenser av faktorer som kan följa på varandra
 
-<FACTOR> ->  <ANY> | <CHAR> |  <FACTOR> <UNARY>  //Faktorer är atomära :)
+<FACTOR> ->  <CAPTURE_GROUP>| <ANY> | <CHAR> |  <FACTOR> <UNARY>  //Faktorer är atomära :)
 
 <CAPTURE_GROUP> -> ( <EXPR> )   //En grupp är en parentes med ett uttryck inuti
 
@@ -36,6 +37,6 @@
 
 <DIGIT> -> 0|1|2|3|4|5|6|7|8|9   // siffror
 
-<NUMBER> -> <DIGIT>[<NUMBER>]   //Ett tal, en sekvens av siffror
+<NUMBER> -> <DIGIT>[<NUMBER>]   //Ett tal, "en sekvens av siffror"
 
 

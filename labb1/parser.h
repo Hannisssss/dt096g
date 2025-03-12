@@ -12,23 +12,23 @@
 
 class Parser {
 public:
-    Parser(const std::vector<Token>& tokens) : tokens(tokens), currentIndex(0) {}
-    ASTNodePtr parse();  // Startar parsningen och returnerar roten av AST-trädet
+    explicit Parser(const std::vector<Token>& tokens) : tokens(tokens), currentIndex(0) {}
+    ASTNodePtr parse();  // Startar parsningen och returnerar roten av AST-träde
 
 
 private:
-    const std::vector<Token>& tokens; // Vektorn som innehåller tokens
-    size_t currentIndex;              // Håller koll på aktuellt index
+    const std::vector<Token>& tokens;
+    size_t currentIndex;
 
     Token current_token();
     void next_token();
     int parse_digits();
     bool is_unary_token(TokenType type);
 
-    ASTNodePtr parse_expr();    // Hanterar OR (|)
+    ASTNodePtr parse_expr();
     ASTNodePtr parse_term();    // Hanterar konkatenation
     ASTNodePtr parse_factor();  // Hanterar tecken, grupper och andra grundläggande element
-    ASTNodePtr parse_unary(ASTNodePtr node); // Hanterar * {n} \I
+    ASTNodePtr parse_unary(ASTNodePtr node); // Hanterar * {n}
     ASTNodePtr parse_group();   // Hanterar parentesuttryck ( <EXPR> )
 };
 

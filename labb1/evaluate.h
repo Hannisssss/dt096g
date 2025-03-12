@@ -12,7 +12,7 @@ struct EvalResult {
 
     explicit EvalResult(bool s, std::string text = "") : status(s), match(std::move(text)) {}
 
-    // Hjälpfunktioner för enkelhet
+    // Hjälpfunktioner!
     static EvalResult success(std::string text) {
         return EvalResult(true, std::move(text));
     }

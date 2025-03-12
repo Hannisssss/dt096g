@@ -12,14 +12,14 @@ int main() {
                         " to Waterloo knowing was my fate is I to be with you Waterloo finally"
                         " facing my Waterloo ";
 
-    std::string match= "a";
+    std::string match= "could.{3}";
     Lexer lexer(match.begin(),match.end());
-    std::vector<Token> tokens = lexer.collectTokens(); // Tokenisera strängen
+    std::vector<Token> tokens = lexer.collectTokens();
     Parser parser(tokens);
     ASTNodePtr rootNode = parser.parse();
     //printTree(rootNode);
 
-    for (size_t start = 0; start < input.size(); start++) { //
+    for (size_t start = 0; start < input.size(); start++) { //gå igenom alla startpunkter
         size_t index = start;
         EvalResult result = rootNode->evaluate(input, index);
         if (result.status) {
